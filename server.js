@@ -50,6 +50,6 @@ server.get("/video", function(req, res){
     res.render("video", {item: video});
 })
 
-server.listen(5000, function(){
+server.listen(5001, function(){
     console.log('server is running');
 })
