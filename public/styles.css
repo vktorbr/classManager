@@ -170,3 +170,18 @@ a.button{
     text-align: center;
     text-decoration: none;
 }
+
+form{
+    display: inline;
+}
+
+.teacher-edit button,
+#form-delete button{
+    width: 48%;
+}
+
+#form-delete button{
+    background-color: lightcoral;
+    margin-left: 8px;
+}
+
