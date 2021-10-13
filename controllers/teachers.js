@@ -1,11 +1,9 @@
-const data = require('./data.json');
+const data = require('../data.json');
 const fs = require('fs');
-const { age, graduation, date } = require('./utils');
+const { age, graduation, date } = require('../utils');
 
 //index
-exports.index = function(req, res){
-    
-    
+exports.index = function(req, res){    
     return res.render("teachers/index", { teachers: data.teachers });
 }
 
@@ -31,6 +29,11 @@ exports.show = function(req, res){
 }
 
 //create
+exports.create = function(req, res){
+    return res.render("teachers/create");
+}
+
+//post
 exports.post = function(req, res){
     const keys = Object.keys(req.body);
 
@@ -42,7 +45,13 @@ exports.post = function(req, res){
 
     let { avatar_url, name, birth, education_level, type_of_class, services } = req.body;
 
-    const id = Number(data.teachers.length + 1);
+    let id = 1;
+    const lastTeacher = data.teachers[data.teachers.length - 1];
+
+    if(lastTeacher){
+        id = lastTeacher.id + 1;
+    }
+
     birth = Date.parse(birth);
     const created_at = Date.now();
     services = services.split(',').map(item => item.trim());
@@ -78,14 +87,12 @@ exports.edit = function(req, res){
 
     const teacher = {
         ...foundTeacher,
-        birth: date(foundTeacher.birth)
+        birth: date(foundTeacher.birth).iso
     }
 
     return res.render('teachers/edit', { teacher });
 }
 
-//é claro que um dia eu não vou conseguir
-//mas esse dia não é hoje
 //put
 exports.put = function(req, res){
     const { id } = req.body;

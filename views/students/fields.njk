@@ -1,0 +1,58 @@
+<div class="item">
+    <div>Avatar URL</div>
+    <div>
+        <input type="url" name="avatar_url" placeholder="http://" value="{{ student.avatar_url }}">
+    </div>
+</div>
+<div class="item">
+    <div>Nome completo</div>
+    <div>
+        <input type="text" name="name" placeholder="Nome do Estudante" value="{{ student.name }}">
+    </div>
+</div>
+<div class="item">
+    <div>Email</div>
+    <div>
+        <input type="email" name="email" value="{{ student.email }}">
+    </div>
+</div>
+<div class="item">
+    <div>Data de nascimento</div>
+    <div>
+        <input type="date" name="birth" value="{{ student.birth }}">
+    </div>
+</div>
+<div class="item">
+    <div>Ano escolar</div>
+    <div>
+        <select name="school_year">
+            <optgroup label="Ensino Fundamental">
+                <option value="5ef" {% if student.school_year == "5ef" %} selected
+                {% endif %}>5º ano</option>
+                <option value="6ef" {% if student.school_year == "6ef" %} selected
+                {% endif %}>6º ano</option>
+                <option value="7ef" {% if student.school_year == "7ef" %} selected
+                {% endif %}>7º ano</option>
+                <option value="8ef" {% if student.school_year == "8ef" %} selected
+                {% endif %}>8º ano</option>
+                <option value="9ef" {% if student.school_year == "9ef" %} selected
+                {% endif %}>9º ano</option>
+            </optgroup>
+            <optgroup label="Ensino Médio">
+                <option value="1em" {% if student.school_year == "1em" %} selected
+                {% endif %}>1º ano</option>
+                <option value="2em" {% if student.school_year == "2em" %} selected
+                {% endif %}>2º ano</option>
+                <option value="3em" {% if student.school_year == "3em" %} selected
+                {% endif %}>3º ano</option>
+            </optgroup>
+        </select>
+    </div>
+</div>
+<div class="item">
+    <div>Carga horária semanal (horas)</div>
+    <div>
+        <input type="number" name="workload" value="{{ student.workload }}">
+    </div>
+</div>
+<button type="submit">Salvar</button>
