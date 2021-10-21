@@ -1,5 +1,5 @@
 module.exports = {
-    age: function(timestamp){
+    age(timestamp){
 
         const today = new Date();
         const birthDate = new Date(timestamp);
@@ -15,7 +15,7 @@ module.exports = {
         }
         return age;
     },
-    date: function(timestamp){
+    date(timestamp){
         const birth = new Date(timestamp);
 
         const year = birth.getUTCFullYear();
@@ -31,7 +31,7 @@ module.exports = {
 
         }
     },
-    graduation: function(education_level){
+    graduation(education_level){
         switch (education_level) {
             case '1':
                 return 'Ensino Médio Completo';
@@ -45,7 +45,7 @@ module.exports = {
                 return 'Indefinido';
         }
     },
-    grade: function(school_year){
+    grade(school_year){
         switch (school_year) {
             case '5ef':
                 return '5º Ano do Ensino Fundamental';
