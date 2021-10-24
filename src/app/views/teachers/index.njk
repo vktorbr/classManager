@@ -8,6 +8,7 @@
             <tr>
                 <th>Nome completo</th>
                 <th>Acompanhamento</th>
+                <th>Alunos</th>
                 <th>Ação</th>
             </tr>
         </thead>
@@ -19,9 +20,12 @@
                         {{teacher.name}}
                     </td>
                     <td>
-                        {% for service in teacher.services %}
+                        {% for service in teacher.subjects_taught %}
                             <span>{{service}}</span>
                         {% endfor %}
+                    </td>
+                    <td>
+                        {{teacher.total_students}}
                     </td>
                     <td><a href="/teachers/{{teacher.id}}" class="link">Ver</a></td>
                 </tr>

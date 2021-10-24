@@ -27,6 +27,10 @@
             <div>Carga horária semanal (horas)</div>
             <div>{{ student.workload }}</div>
         </div>
+        <div class="item">
+            <div>Aluno de</div>
+            <div>{{ student.teacher }}</div>
+        </div>
         <a href="/students/{{student.id}}/edit" class="button">Editar</a>
     </section>
 </div>
