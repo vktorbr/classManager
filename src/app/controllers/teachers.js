@@ -1,39 +1,40 @@
 const { date, grade, age, graduation } = require('../../lib/utils');
+const teacher = require('../models/teacher');
 const Teacher = require('../models/teacher');
 
 module.exports = {
     index(req, res){
-        const { filter } = req.query;
-        if(filter){
-            Teacher.findBy(filter, function(teachers2){
-                let newTeachers = teachers2.map(teacher => {
+        let { filter, page, limit } = req.query;
+
+        page = page || 1;
+        limit = limit || 2;
+        let offset = limit * (page - 1);
+
+
+        const params = {
+            filter,
+            page,
+            limit,
+            offset,
+            callback(teachers){
+                const pagination = {
+                    total: Math.ceil(teachers[0].total / limit),
+                    page
+                };
+
+                let newTeachers = teachers.map(teacher => {
                     let newTeacher = {
                         ...teacher
                     };
-    
                     newTeacher["subjects_taught"] = teacher.subjects_taught.split(",");
-    
                     return newTeacher;
                 })
 
-                return res.render("teachers/index", { teachers: newTeachers, filter });
-            })
-        }else{
-            Teacher.all(function(teachers2){
-                let newTeachers = teachers2.map(teacher => {
-                    let newTeacher = {
-                        ...teacher
-                    };
-    
-                    newTeacher["subjects_taught"] = teacher.subjects_taught.split(",");
-    
-                    return newTeacher;
-                })
-    
-                return res.render("teachers/index", { teachers: newTeachers });
-            })
+                return res.render("teachers/index", { teachers: newTeachers, pagination, filter })
+            }
         }
-        
+
+        Teacher.paginate(params);
     },
     show(req, res){
         Teacher.find(req.params.id, function(teacher){
